@@ -1,7 +1,6 @@
 package com.ohgiraffers.problem;
 
 import org.junit.jupiter.api.*;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
