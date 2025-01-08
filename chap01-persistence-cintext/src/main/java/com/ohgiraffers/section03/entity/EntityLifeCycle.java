@@ -12,10 +12,12 @@ public class EntityLifeCycle {
     }
 
 
-    public Menu findMenuBuMenuCode(int menuCode) {
+    public Menu findMenuByMenuCode(int menuCode) {
 
         manager = EntityManagerGenerator.getInstance();
 
         return manager.find(Menu.class , menuCode);
     }
+
+
 }

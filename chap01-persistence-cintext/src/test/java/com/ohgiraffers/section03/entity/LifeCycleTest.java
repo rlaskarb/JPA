@@ -28,7 +28,7 @@ public class LifeCycleTest {
     @ValueSource(ints={1,2})
     void testNotManaged(int menuCode){
 
-        Menu foundMenu = lifeCycle.findMenuBuMenuCode(menuCode);
+        Menu foundMenu = lifeCycle.findMenuByMenuCode(menuCode);
 
 
         Menu newMenu = new Menu(
@@ -48,8 +48,8 @@ public class LifeCycleTest {
     @DisplayName("다른 엔티티 매니저가 관리하는 영속성 테스트")
     @ValueSource(ints ={1,2})
     void testOtherManager(int menuCode){
-        Menu menu1 = lifeCycle.findMenuBuMenuCode(menuCode);
-        Menu menu2 = lifeCycle.findMenuBuMenuCode(menuCode);
+        Menu menu1 = lifeCycle.findMenuByMenuCode(menuCode);
+        Menu menu2 = lifeCycle.findMenuByMenuCode(menuCode);
 
         Assertions.assertEquals(menu1,menu2);
     }
