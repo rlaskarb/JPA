@@ -1,6 +1,6 @@
 package com.ohgiraffers.associationmapping.section01.manytoone;
 
-import org.hibernate.annotations.Array;
+import jakarta.persistence.ManyToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,13 +20,13 @@ public class ManyToOneService {
 
     public String findCategoryName(int menuCode) {
 
-        return  repository.findCategoryName(menuCode);
+        return repository.findCategoryName(menuCode);
     }
 
     @Transactional
-    public void registMenu(MenuDTO menuInfo){
+    public void registMenu(MenuDTO menuInfo) {
 
-        Menu menu= new Menu(
+        Menu menu = new Menu(
                 menuInfo.getMenuCode(),
                 menuInfo.getMenuName(),
                 menuInfo.getMenuPrice(),
@@ -38,10 +38,7 @@ public class ManyToOneService {
                 menuInfo.getOrderableStatus()
         );
 
-        repository.registMenu(menu);
+        repository.regist(menu);
+
     }
-
-
-
-
 }

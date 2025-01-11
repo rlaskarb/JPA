@@ -1,6 +1,5 @@
 package com.ohgiraffers.associationmapping.section01.manytoone;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -9,14 +8,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.data.annotation.LastModifiedBy;
 
 @Entity(name = "section01Category")
 @Table(name = "tbl_category")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-//@ToString
+@ToString
 public class Category {
 
     @Id
@@ -27,7 +25,6 @@ public class Category {
     private String categoryName;
 
     @Column(name = "ref_category_code")
-    private  Integer refCategoryCode;
-
+    private Integer refCategoryCode;
 
 }

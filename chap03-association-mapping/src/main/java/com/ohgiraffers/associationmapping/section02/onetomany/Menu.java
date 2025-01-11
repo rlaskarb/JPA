@@ -7,14 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity(name="section02Menu")
+@Entity(name = "section02Menu")
 @Table(name = "tbl_menu")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @ToString
 public class Menu {
-
 
     @Id
     @Column(name = "menu_code")
@@ -32,6 +31,5 @@ public class Menu {
 
     @Column(name = "orderable_status")
     private String orderableStatus;
-
 
 }

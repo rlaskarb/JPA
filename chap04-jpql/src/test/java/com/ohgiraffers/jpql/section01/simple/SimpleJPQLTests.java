@@ -11,7 +11,6 @@ import java.util.List;
 @SpringBootTest
 public class SimpleJPQLTests {
 
-
     /*
      * [ JPQL(Java Persistence Query Language) ]
      * JPQL은 엔티티 객체를 중심으로 개발할 수 있는 객체 지향 쿼리이다.
@@ -86,11 +85,9 @@ public class SimpleJPQLTests {
         String menuName = repository.selectSingleMenuByTypedQuery();
 
         //then
-        Assertions.assertEquals("흑우딸기국밥", menuName);
+        Assertions.assertEquals("한우딸기국밥", menuName);
         Assertions.assertEquals(repository.findMenu(8).getMenuName(), menuName);
     }
-
-
 
     @DisplayName("Query를 이용한 단일메뉴(단일행,단일컬럼) 조회 테스트")
     @Test
@@ -100,11 +97,9 @@ public class SimpleJPQLTests {
         Object menuName = repository.selectSingleMenuByQuery();
 
         //then
-        Assertions.assertEquals("흑우딸기국밥", menuName);
+        Assertions.assertEquals("한우딸기국밥", menuName);
         Assertions.assertTrue(menuName instanceof String);
     }
-
-
 
     @DisplayName("TypedQuery를 이용한 단일행 조회 테스트")
     @Test
@@ -117,8 +112,6 @@ public class SimpleJPQLTests {
         Assertions.assertEquals(8, menu.getMenuCode());
     }
 
-
-
     @DisplayName("TypedQuery를 이용한 다중행 조회 테스트")
     @Test
     public void testSelectMultipleRowByTypedQuery() {
@@ -130,8 +123,6 @@ public class SimpleJPQLTests {
         Assertions.assertNotNull(menuList);
         menuList.forEach(System.out::println);
     }
-
-
 
     @DisplayName("Query를 이용한 다중행 조회 테스트")
     @Test
@@ -147,7 +138,6 @@ public class SimpleJPQLTests {
         // 람다 & 스트림 문법으로서 식을 더욱 간결하게 만들어준다.
         // menuList.forEach(menu -> System.out.println(menu));
     }
-
 
     /* WHERE절에서 사용하는 연산자는 SQL과 다르지 않음 */
     @DisplayName("DISTINCT를 활용한 중복 제거 다중행 조회 테스트")
@@ -186,6 +176,3 @@ public class SimpleJPQLTests {
         menuList.forEach(System.out::println);
     }
 }
-
-
-

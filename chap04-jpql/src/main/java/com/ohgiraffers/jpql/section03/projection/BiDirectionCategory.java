@@ -1,6 +1,5 @@
 package com.ohgiraffers.jpql.section03.projection;
 
-
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -27,5 +26,4 @@ public class BiDirectionCategory {
     public List<BiDirectionMenu> getMenuList() {
         return menuList;
     }
-
 }

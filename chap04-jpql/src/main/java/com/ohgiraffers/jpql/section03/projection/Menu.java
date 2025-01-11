@@ -1,6 +1,5 @@
 package com.ohgiraffers.jpql.section03.projection;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -70,5 +69,4 @@ public class Menu {
                 ", orderableStatus='" + orderableStatus + '\'' +
                 '}';
     }
-
 }

@@ -1,6 +1,5 @@
 package com.ohgiraffers.jpql.section03.projection;
 
-
 public class CategoryInfo {
 
     private int categoryCode;
@@ -37,7 +36,4 @@ public class CategoryInfo {
                 ", categoryName='" + categoryName + '\'' +
                 '}';
     }
-
-
-
 }

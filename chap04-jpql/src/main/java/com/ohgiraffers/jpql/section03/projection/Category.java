@@ -4,11 +4,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.springframework.web.bind.annotation.CookieValue;
 
 @Entity(name = "Section03Category")
 @Table(name = "tbl_category")
 public class Category {
-
 
     @Id
     @Column(name = "category_code")
@@ -48,6 +48,4 @@ public class Category {
                 ", refCategoryCode=" + refCategoryCode +
                 '}';
     }
-
-
 }

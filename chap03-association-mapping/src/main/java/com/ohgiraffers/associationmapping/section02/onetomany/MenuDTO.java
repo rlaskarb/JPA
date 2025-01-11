@@ -2,11 +2,10 @@ package com.ohgiraffers.associationmapping.section02.onetomany;
 
 import lombok.*;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
 @Getter
+@Setter
 @ToString
 public class MenuDTO {
 
@@ -15,5 +14,6 @@ public class MenuDTO {
     private int menuPrice;
     private int categoryCode;
     private String orderableStatus;
+
 
 }

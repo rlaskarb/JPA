@@ -2,11 +2,10 @@ package com.ohgiraffers.associationmapping.section01.manytoone;
 
 import lombok.*;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
 @Getter
+@Setter
 @ToString
 public class MenuDTO {
 

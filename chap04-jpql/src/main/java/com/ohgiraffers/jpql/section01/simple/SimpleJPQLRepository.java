@@ -15,17 +15,17 @@ public class SimpleJPQLRepository {
     private EntityManager manager;
 
     /* index. 학습목표 설정
-     *   1. JPA 를 사용할 때 직접적인 쿼리문 작성
-     *   2. 쿼리문 수행 시 반환되는 타입 Query, TypedQuery 의 차이
-     *   3. 반환 타입에 대한 고찰
-     *   4. 반환 값이 1개일 때, 여러개 일 때
-     * */
+    *   1. JPA 를 사용할 때 직접적인 쿼리문 작성
+    *   2. 쿼리문 수행 시 반환되는 타입 Query, TypedQuery 의 차이
+    *   3. 반환 타입에 대한 고찰
+    *   4. 반환 값이 1개일 때, 여러개 일 때
+    * */
 
 
     public Menu findMenu(int menuCode) {
         return manager.find(Menu.class, menuCode);
     }
-//================================================================================================
+
     public String selectSingleMenuByTypedQuery() {
         String jpql = "SELECT m.menuName FROM Section01Menu as m WHERE m.menuCode = 8";
         TypedQuery<String> query = manager.createQuery(jpql, String.class);
@@ -34,8 +34,6 @@ public class SimpleJPQLRepository {
         return resultMenuName;
     }
 
-//===============================================================================================
-
     public Object selectSingleMenuByQuery() {
         String jpql = "SELECT m.menuName FROM Section01Menu as m WHERE m.menuCode = 8";
         Query query = manager.createQuery(jpql);
@@ -43,7 +41,6 @@ public class SimpleJPQLRepository {
 
         return resultMenuName;
     }
-//===============================================================================================
 
     public Menu selectSingleRowByTypedQuery() {
         String jpql = "SELECT m FROM Section01Menu m WHERE m.menuCode = 8";
@@ -53,9 +50,6 @@ public class SimpleJPQLRepository {
         return resultMenu;
     }
 
-//==============================================================================================
-
-
     public List<Menu> selectMultipleRowByTypedQuery() {
         String jpql = "SELECT m FROM Section01Menu m";
         TypedQuery<Menu> query = manager.createQuery(jpql, Menu.class);
@@ -63,9 +57,6 @@ public class SimpleJPQLRepository {
 
         return resultMenuList;
     }
-
-
-
 
     public List<Menu> selectMultipleRowByQuery() {
         String jpql = "SELECT m FROM Section01Menu m";
@@ -97,7 +88,3 @@ public class SimpleJPQLRepository {
         return resultMenuList;
     }
 }
-
-
-
-

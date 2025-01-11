@@ -10,9 +10,9 @@ import java.util.List;
 public class ProjectionRepository {
 
     /* index. 3. 학습목표
-     *   1. 조회 시 테이블에 대한 설정.
-     *   2. 우리는 MYSQL 을 직접적으로 사용하는 것이 아닌 엔티티 객체를 관리하는 곳에서 조회를 한다.
-     *  */
+    *   1. 조회 시 테이블에 대한 설정.
+    *   2. 우리는 MYSQL 을 직접적으로 사용하는 것이 아닌 엔티티 객체를 관리하는 곳에서 조회를 한다.
+    *  */
 
     @PersistenceContext
     private EntityManager manager;
@@ -31,8 +31,8 @@ public class ProjectionRepository {
     public BiDirectionCategory biDirectionEntityProjection(int menuCode) {
         String jpql = "SELECT m.category FROM BiDirectionMenu m WHERE m.menuCode = :menuCode";
         BiDirectionCategory resultCategory = manager.createQuery(jpql, BiDirectionCategory.class)
-                .setParameter("menuCode", menuCode)
-                .getSingleResult();
+                                                    .setParameter("menuCode", menuCode)
+                                                    .getSingleResult();
 
         return resultCategory;
     }
@@ -60,11 +60,10 @@ public class ProjectionRepository {
 
     public List<CategoryInfo> newCommandProjection() {
         String jpql = "SELECT new com.ohgiraffers.jpql.section03.projection.CategoryInfo(c.categoryCode, c.categoryName)" +
-                "FROM Section03Category c";
+                        "FROM Section03Category c";
         List<CategoryInfo> resultList = manager.createQuery(jpql, CategoryInfo.class).getResultList();
 
         return resultList;
     }
-
-
 }
+

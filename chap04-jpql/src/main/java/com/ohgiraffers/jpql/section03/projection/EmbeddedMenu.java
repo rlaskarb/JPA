@@ -1,6 +1,5 @@
 package com.ohgiraffers.jpql.section03.projection;
 
-
 import jakarta.persistence.*;
 
 @Entity(name = "EmbeddedMenu")
@@ -54,6 +53,4 @@ public class EmbeddedMenu {
                 ", orderableStatus='" + orderableStatus + '\'' +
                 '}';
     }
-
-
 }

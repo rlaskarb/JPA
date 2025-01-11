@@ -6,8 +6,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity(name = "Section02Menu")
-@Table(name = "tbl_menu" )
+@Table(name = "tbl_menu")
 public class Menu {
+
     @Id
     @Column(name = "menu_code")
     private int menuCode;
@@ -64,5 +65,4 @@ public class Menu {
                 ", orderableStatus='" + orderableStatus + '\'' +
                 '}';
     }
-
 }

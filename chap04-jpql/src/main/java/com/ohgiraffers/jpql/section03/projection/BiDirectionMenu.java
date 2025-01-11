@@ -2,9 +2,6 @@ package com.ohgiraffers.jpql.section03.projection;
 
 import jakarta.persistence.*;
 
-/*Hibernate 는 엔티티를 통해 데이터 베이스와 상호작하는 ORM 프레임 워크 입니다.*/
-
-
 @Entity(name = "BiDirectionMenu")
 @Table(name = "tbl_menu")
 public class BiDirectionMenu {
@@ -27,5 +24,4 @@ public class BiDirectionMenu {
     private String orderableStatus;
 
     protected BiDirectionMenu() {}
-
 }
