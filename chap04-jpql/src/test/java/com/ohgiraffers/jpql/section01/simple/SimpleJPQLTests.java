@@ -40,7 +40,7 @@ public class SimpleJPQLTests {
      *       [group by절]
      *       [having절]
      *       [order by절]
-     * - insert : EntityManager가 제공하는 persist() 메소드를 사용하면 되므로 따로 없다.
+     * - insert : EntityManager 가 제공하는 persist() 메소드를 사용하면 되므로 따로 없다.
      * - update :
      *       update
      *       set
@@ -54,7 +54,7 @@ public class SimpleJPQLTests {
     /*
      * [ JPQL 사용 시 주의사항 ]
      * - 엔티티와 속성은 대소문자를 구분한다. (userId != userid)
-     * - SELECT, FROM, WHERE 같은 JPQL의 기본 키워드들은 대소문자를 구분하지 않는다.
+     * - SELECT, FROM, WHERE 같은 JPQL 의 기본 키워드들은 대소문자를 구분하지 않는다.
      *   (INSERT 는 persist() 메소드를 사용하면 된다.)
      * - 엔티티명은 클래스명이 아닌 엔티티명이다.
      * - JPQL은 엔티티 별칭을 필수로 사용해야 하며, 별칭 없이 사용하면 에러가 발생한다.
@@ -77,7 +77,7 @@ public class SimpleJPQLTests {
     @Autowired
     private SimpleJPQLRepository repository;
 
-    @DisplayName("TypedQuery를 이용한 단일메뉴(단일행,단일컬럼) 조회 테스트")
+    @DisplayName("TypedQuery 를 이용한 단일메뉴(단일행,단일컬럼) 조회 테스트")
     @Test
     public void testSelectSingleMenuByTypedQuery() {
         //given
@@ -85,7 +85,7 @@ public class SimpleJPQLTests {
         String menuName = repository.selectSingleMenuByTypedQuery();
 
         //then
-        Assertions.assertEquals("한우딸기국밥", menuName);
+        Assertions.assertEquals("흑우딸기국밥", menuName);
         Assertions.assertEquals(repository.findMenu(8).getMenuName(), menuName);
     }
 
@@ -97,7 +97,7 @@ public class SimpleJPQLTests {
         Object menuName = repository.selectSingleMenuByQuery();
 
         //then
-        Assertions.assertEquals("한우딸기국밥", menuName);
+        Assertions.assertEquals("흑우딸기국밥", menuName);
         Assertions.assertTrue(menuName instanceof String);
     }
 
