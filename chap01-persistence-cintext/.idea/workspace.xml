@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fae801ec-6595-43ce-b27f-3f2f6ee49ab0" name="변경" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2rHLob4XSpbjzouOAWe2zGa33GM" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.EntityMangerGeneratorTest.testCreateFactory.executor": "Run",
+    "JUnit.EntityManagerCRUDTest.testFindByCode.executor": "Run",
+    "JUnit.EntityMangerCRUDTest.executor": "Run",
+    "JUnit.EntityMangerCRUDTest.modifyTestMenu.executor": "Run",
+    "JUnit.EntityMangerCRUDTest.testFindByCode.executor": "Run",
+    "JUnit.EntityMangerCRUDTest.testInsertNewMenu (1).executor": "Run",
+    "JUnit.EntityMangerCRUDTest.testInsertNewMenu.executor": "Run",
+    "JUnit.EntityMangerCRUDTest.testRemoveMenu.executor": "Run",
+    "JUnit.EntityMangerGeneratorTest.testCreateFactory.executor": "Run",
+    "JUnit.EntityMangerGeneratorTest.testCreateManager.executor": "Run",
+    "JUnit.LifeCycleTest.testDetachAndPersist.executor": "Run",
+    "JUnit.LifeCycleTest.testDetachEntity.executor": "Run",
+    "JUnit.LifeCycleTest.testNotManaged.executor": "Run",
+    "JUnit.LifeCycleTest.testOtherManager.executor": "Run",
+    "JUnit.LifeCycleTest.testRemoveEntity.executor": "Run",
+    "JUnit.LifeCycleTest.testSameManager.executor": "Run",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "C:/Lecture/12_jpa/01_lecture-source/chap01-persistence-cintext/src/main/java/com/ohgiraffers/section02/crud",
+    "last_opened_file_path": "C:/Lecture",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Lecture/12_jpa/01_lecture-source/chap01-persistence-cintext/src/main/java/com/ohgiraffers/Main.java",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Lecture\12_jpa\01_lecture-source\chap01-persistence-cintext\src\test\java\ohgiraffers" />
+      <recent name="C:\Lecture\12_jpa\01_lecture-source\chap01-persistence-cintext\src\test\java" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.ohgiraffers.section03.entity" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.LifeCycleTest.testSameManager">
+    <configuration name="LifeCycleTest.testDetachAndPersist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chap01-persistence-cintext.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ohgiraffers.section03.entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ohgiraffers.section03.entity" />
+      <option name="MAIN_CLASS_NAME" value="com.ohgiraffers.section03.entity.LifeCycleTest" />
+      <option name="METHOD_NAME" value="testDetachAndPersist(int,int)" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LifeCycleTest.testDetachEntity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chap01-persistence-cintext.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ohgiraffers.section03.entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ohgiraffers.section03.entity" />
+      <option name="MAIN_CLASS_NAME" value="com.ohgiraffers.section03.entity.LifeCycleTest" />
+      <option name="METHOD_NAME" value="testDetachEntity(int,int)" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LifeCycleTest.testNotManaged" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chap01-persistence-cintext.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ohgiraffers.section03.entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ohgiraffers.section03.entity" />
+      <option name="MAIN_CLASS_NAME" value="com.ohgiraffers.section03.entity.LifeCycleTest" />
+      <option name="METHOD_NAME" value="testNotManaged(int)" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LifeCycleTest.testRemoveEntity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chap01-persistence-cintext.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ohgiraffers.section03.entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ohgiraffers.section03.entity" />
+      <option name="MAIN_CLASS_NAME" value="com.ohgiraffers.section03.entity.LifeCycleTest" />
+      <option name="METHOD_NAME" value="testRemoveEntity(int)" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LifeCycleTest.testSameManager" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chap01-persistence-cintext.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ohgiraffers.section03.entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ohgiraffers.section03.entity" />
+      <option name="MAIN_CLASS_NAME" value="com.ohgiraffers.section03.entity.LifeCycleTest" />
+      <option name="METHOD_NAME" value="testSameManager(int)" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.LifeCycleTest.testSameManager" />
+        <item itemvalue="JUnit.LifeCycleTest.testNotManaged" />
+        <item itemvalue="JUnit.LifeCycleTest.testRemoveEntity" />
+        <item itemvalue="JUnit.LifeCycleTest.testDetachAndPersist" />
+        <item itemvalue="JUnit.LifeCycleTest.testDetachEntity" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="fae801ec-6595-43ce-b27f-3f2f6ee49ab0" name="변경" comment="" />
+      <created>1736211232598</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1736211232598</updated>
+      <workItem from="1736211234228" duration="22595000" />
+      <workItem from="1736296795586" duration="1003000" />
+      <workItem from="1736331540729" duration="32000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

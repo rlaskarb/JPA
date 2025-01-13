@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .modal {
+            display: none; /* 기본적으로 모달창 숨기기 */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* 어두운 배경 */
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%;
+            text-align: center;
+            border-radius: 10px;
+        }
+    </style>
+
+</head>
+<body>
+<h1> 이것은 메뉴판이다 </h1>
+
+<table style="text-align: center; color: brown" border="1" >
+    <tr>
+        <th>메뉴번호</th>
+        <th>메뉴이름</th>
+        <th>메뉴가격</th>
+        <th>카테고리 코드</th>
+        <th>판매상태</th>
+        <th th:if="${param.deleteMode}"> 삭제 </th> <!--deleteMode가 true 일 경우만 삭제-->
+    </tr>
+
+    <tr th:each="result :${menus}">
+        <td th:text="${result.menuCode}"></td>
+        <td th:text="${result.menuName}"></td>
+        <td th:text="${result.menuPrice}"></td>
+        <td th:text="${result.categoryCode}"></td>
+        <td th:text="${result.orderableStatus}"></td>
+        <td th:if="${param.deleteMode}">
+            <button type="button" class="deleteBtn" th:data-menu-code="${result.menuCode}"> x </button>
+        </td>
+    </tr>
+</table>
+
+<!--삭제 확인 모달-->
+<div id="deleteConfirmModal" class="modal">
+    <div class="modal-content">
+        <p> 정말로 삭제 하시겠습니까? </p>
+        <button id="confirmDeleteBtn"> 확인 </button>
+        <button id="cancelDeleteBtn"> 취소 </button>
+    </div>
+</div>
+
+
+
+<div id="paging">
+    <!-- 맨 앞 페이지 이동하는 버튼 -->
+    <button
+            th:onclick="'location.href=\'/menu/list?page=' + ${paging.startPage} + '&deleteMode=true' + '\''">
+        «</button>
+
+    <!-- 이전 페이지 이동하는 버튼 -->
+    <button
+            th:onclick="'location.href=\'/menu/list?page=' + ${paging.currentPage - 1} + '&deleteMode=true'+'\''"
+            th:disabled="${menus.first}">
+
+        ‹</button>
+
+    <!-- 숫자 페이지 버튼 -->
+    <th:block th:each="page : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+        <button
+                th:onclick="'location.href=\'/menu/list?page=' + ${page} + '&deleteMode=true'+'\''"
+                th:text="${page}"
+                th:disabled="${paging.currentPage eq page}"
+        >
+
+        </button>
+    </th:block>
+
+    <!-- 다음 페이지 이동하는 버튼 -->
+    <button
+            th:onclick="'location.href=\'/menu/list?page=' + ${paging.currentPage + 1} + '&deleteMode=true'+'\''"
+            th:disabled="${menus.last}"
+    >›</button>
+
+    <!-- 맨 뒤 페이지 이동하는 버튼 -->
+    <button
+            th:onclick="'location.href=\'/menu/list?page=' + ${paging.endPage} + '&deleteMode=true'+'\''"
+    >»</button>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let menuCodeToDelete = null;
+        //삭제버튼 클릭시 모달 열기
+        document.querySelectorAll(".deleteBtn").forEach(button => {
+            button.addEventListener("click", (e) => {
+                menuCodeToDelete = e.target.dataset.menuCode; //메뉴 코드 저장
+                document.getElementById("deleteConfirmModal").style.display = "block" //모달열기
+            });
+        });
+        //"확인" 버튼 클릭 시 삭제 요청
+        document.getElementById("confirmDeleteBtn").addEventListener("click", () => {
+            fetch(`/menu/delete/${menuCodeToDelete}`, {
+                method: 'DELETE'
+            }).then(res => {
+
+                if (res.ok) {
+                    alert("메뉴가 삭제되었습니다.");
+                    window.location.reload();
+                } else {
+                    alert("삭제가 안되었으");
+                }
+            });
+        });
+        console.log("삭제할 메뉴  코드 확인차 ",menuCodeToDelete);
+        document.getElementById("cancelDeleteBtn").addEventListener("click", () => {
+            document.getElementById("deleteConfirmModal").style.display = "none"; // 모달 닫기
+        });
+
+        //취소 버튼 클릭스 모달 닫기
+        document.onclick = function (event) {
+            const modal = document.getElementById("deleteConfirmModal");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>메뉴 등록</title>
+    <style>
+        /* 모달창 스타일 */
+        .modal {
+            display: none; /* 기본적으로 숨김 */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4); /* 배경 어둡게 */
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .modal-footer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>신규 메뉴 등록</h1>
+<form id="menuForm" th:action="@{/menu/save}" method="post">
+
+    <label for="menuName">메뉴 이름 :</label>
+    <input type="text" id="menuName" name="menuName" required><br>
+    <label for="menuPrice">메뉴 가격 :</label>
+    <input type="number" id="menuPrice" name="menuPrice" required><br>
+
+    <label for="categoryCode">카테고리 : </label>
+
+    <select name="categoryCode" id="categoryCode">
+        <option th:each="category:${categories}"
+                th:value ="${category.categoryCode}"
+                th:text="${category.categoryName}"></option>
+    </select><br>
+
+    <label for="orderableStatus">판매여부 : </label>
+    <select name="orderableStatus" id="orderableStatus">
+        <option value="Y">가능</option>
+        <option value="N">불가능</option>
+    </select><br>
+
+    <button type="button" id="openModalBtn"> 메뉴 등록 </button>
+
+</form>
+
+
+<!--모달창 등록-->
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <p>등록하시겠습니까?</p>
+        <div class="modal-footer">
+            <button id="confirmBtn"> 확인 </button>
+            <button id="cancelBtn"> 취소 </button>
+        </div>
+    </div>
+</div>
+<!--등록 완료 모달-->
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <p>등록이 완료 되었습니다.</p>
+        <div class="modal-footer">
+            <button id="closeSuccessBtn"> 닫기 </button>
+        </div>
+    </div>
+</div>
+<script>
+    //category 데이터 동적 추가
+    fetch('/menu/category') // 아직은 js 객체가 아닌 형태만 js
+        .then(res =>res.json()) // 형태만 js 인 녀석을 진짜 js 객체로 변환
+        .then(data => {
+            const $categoryCode = document.getElementById("categoryCode");
+            //data list 형태이기 떄문에 반복문 사용
+            data.forEach(category =>{
+                const $option = document.createElement("option");
+                $option.value = category.categoryCode;
+                $option.textContent = category.categoryName;
+                $categoryCode.appendChild($option);
+            });
+        });
+
+    //모달 요소가져오기
+    const confirmModal = document.getElementById("confirmModal");
+    const successModal = document.getElementById("successModal");
+    const openModalBtn = document.getElementById("openModalBtn");
+    const confirmBtn = document.getElementById("confirmBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const closeSuccessBtn = document.getElementById("closeSuccessBtn");
+
+    //"메뉴 등록 버튼 클릭시 모달열기"
+    openModalBtn.addEventListener("click", () => {
+        confirmModal.style.display = "block";
+    });
+
+    // "확인" 버튼 클릭 시 폼 제출 및 성공 모달 표시
+    confirmBtn.addEventListener("click",()=>{
+        const form =document.getElementById("menuForm");
+        const formData = new FormData(form);
+
+        fetch('/menu/save',{
+            method :'POST',
+            body: formData
+        }).then(res =>{
+            if(res.ok){
+                confirmModal.style.display ="none";
+                successModal.style.display ="block";
+            }else{
+                alert("등록실패");
+            }
+        });
+    });
+
+    // "취소" 버튼 클릭시 모달 닫기
+    cancelBtn.addEventListener("click",()=>{
+        confirmModal.style.display="none";
+    });
+
+    // "닫기" 버튼 클릭 시 성공 모달 닫기
+    closeSuccessBtn.addEventListener("click", () => {
+        window.location.href = "/";
+    });
+
+    // 모달 외부 클릭시 닫기
+    window.onclick=function (event) {
+        if(event.target=== confirmModal) {
+            confirmModal.style.display = "none";
+        }else if (event.target === successModal){
+            successModal.style.display="none";
+        }
+
+    }
+</script>
+
+</body>
+</html>
