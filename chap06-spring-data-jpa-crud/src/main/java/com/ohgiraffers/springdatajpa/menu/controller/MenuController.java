@@ -55,14 +55,14 @@ public class MenuController {
 
        Page<MenuDTO> menuList = menuService.findMenuListByPaging (pageable);
 
-       log.info("조회한 내용 목록: {}" , menuList.getContent());
-       log.info("총 페이지수 : {}", menuList.getTotalPages());
-       log.info("총 메뉴의 수 : {}" , menuList.getTotalElements());
-       log.info("해당 페이지에 표현 될 요소의 수 {} " , menuList.getSize() );
-       log.info("첫 페이지 여부 : {} " ,  menuList.isFirst());
-       log.info("마지막 페이지 여부 : {} " ,menuList.isLast());
-       log.info("정렬 방식 : {}" , menuList.getSort());
-       log.info("여러 페이지 중 현재 인덱스 : {} " ,menuList.getNumber());
+//       log.info("조회한 내용 목록: {}" , menuList.getContent());
+//       log.info("총 페이지수 : {}", menuList.getTotalPages());
+//       log.info("총 메뉴의 수 : {}" , menuList.getTotalElements());
+//       log.info("해당 페이지에 표현 될 요소의 수 {} " , menuList.getSize() );
+//       log.info("첫 페이지 여부 : {} " ,  menuList.isFirst());
+//       log.info("마지막 페이지 여부 : {} " ,menuList.isLast());
+//       log.info("정렬 방식 : {}" , menuList.getSort());
+//       log.info("여러 페이지 중 현재 인덱스 : {} " ,menuList.getNumber());
 
         PagingButton pagingButton = Pagenation.getPagingInfo(menuList);
         model.addAttribute("menus" , menuList);
@@ -92,6 +92,8 @@ public class MenuController {
 
 //=====================================================================================================================
 
+    // 카테고리 검색 드롭바
+
     @GetMapping("/regist")
     public String registPage(Model model) {
         List<CategoryDTO> categories = menuService.findAllCategory();
@@ -104,7 +106,7 @@ public class MenuController {
     public List<CategoryDTO> findCategoryList() {
 
         List<CategoryDTO> category =  menuService.findAllCategory();
-        System.out.println("컨트롤러category = " + category);
+
         // return 구문이 view 지정하는 것이 아닌, Data 를 리턴한다.
 
         return category;
@@ -130,6 +132,22 @@ public class MenuController {
     }
 
 
+//===================================================================================================================
+
+  @GetMapping("/modify")
+    public void modifyPage(){}
+
+
+
+ @PostMapping("/modify")
+ public String modifyMenu(@ModelAttribute MenuDTO modifyMenu){
+
+     System.out.println("수정할 메뉴 정보 객체 = " + modifyMenu);
+
+     menuService.modifyMenu(modifyMenu);
+
+     return "redirect:/menu/" + modifyMenu.getMenuCode();
+ }
 
 
 

@@ -9,8 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-
 @ToString
+//@Builder(toBuilder = true)
 public class Menu {
 
     @Id
@@ -32,5 +32,17 @@ public class Menu {
     private String orderableStatus;
 
 
+//    1. 뭐 지양한다
+
+    /*3 builder 패턴 직접 구현 */
+
+    public Menu menuName(String var){
+        this.menuName=var;
+        return this;
+    }
+
+    public Menu builder(){
+        return new Menu(menuCode,menuName,menuPrice,categoryCode,orderableStatus);
+    }
 
 }

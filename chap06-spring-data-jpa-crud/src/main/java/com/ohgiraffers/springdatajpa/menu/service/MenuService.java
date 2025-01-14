@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -114,9 +115,65 @@ public class MenuService {
 
         return repository.save(menu);
     }
+//================================================================================================================
 
+    // 삭제 기능
 
     public void deleteMenu(int menuCode) {
         repository.deleteById(menuCode);
     }
+//=============================================================================================================
+
+    //DML 구문 이기때문에
+    @Transactional
+    public void registNewMenu(MenuDTO newMenu){
+        //지금까지는 Entity 를 DTO 변환 했다면 DML 구문에서는 DTO 타입을 Entity 로
+        // 변환해야 P
+        repository.save(modelMapper.map(newMenu, Menu.class));
+    }
+
+
+    @Transactional
+    public void modifyMenu(MenuDTO modifyMenu) {
+
+        /* update 는 엔티티를 특정해서 필드의 값을 변경해주면 된다.
+        *  JPA 는 변경감지 기능이 있다.
+        *  따라서 하나의 엔티티를 특정해서 필드 값을 변경하면
+        *  변경된 값으로 flush(반영) 을 해준다. */
+
+        // 엔티티 찾기(특정)
+        Menu foundMenu = repository.findById(modifyMenu.getMenuCode())
+                .orElseThrow(IllegalArgumentException::new);
+
+        System.out.println("찾은 Entity 값 = " + foundMenu);
+
+
+
+//        /* 1. setter 를 통해 update 기능 - (지양한다.)*/
+//        foundMenu.setMenuName(modifyMenu.getMenuName());
+
+//        /*2. @Builder 를 통해 update */
+//        foundMenu=foundMenu.toBuilder()
+//                .menuName(modifyMenu.getMenuName())
+//                .build();
+//        // build 를 통해서 foundMenu 새롭게 탄생 시켰으니
+//        // save 메소드를 통해 jpa 에게 전달
+//
+//        repository.save(foundMenu);
+
+        /*3. Entity 내부에 Builder 패턴을 사용*/
+        foundMenu =foundMenu.menuName(modifyMenu.getMenuName())
+                        .builder();
+
+        repository.save(foundMenu);
+
+        System.out.println("setter 사용후! = " + foundMenu);
+    }
+
+//====================================================================================================================
+
+
+
+
+
 }

@@ -6,29 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        .modal {
-            display: none; /* 기본적으로 모달창 숨기기 */
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5); /* 어두운 배경 */
-        }
-        .modal-content {
-            background-color: #fff;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 30%;
-            text-align: center;
-            border-radius: 10px;
-        }
-    </style>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <h1> 이것은 메뉴판이다 </h1>
@@ -50,17 +28,46 @@
         <td th:text="${result.categoryCode}"></td>
         <td th:text="${result.orderableStatus}"></td>
         <td th:if="${param.deleteMode}">
-            <button type="button" class="deleteBtn" th:data-menu-code="${result.menuCode}"> x </button>
+            <button type="button" class="btn btn-danger delete-btn" th:data-menu-code="${result.menuCode}">X</button>
         </td>
     </tr>
 </table>
 
-<!--삭제 확인 모달-->
-<div id="deleteConfirmModal" class="modal">
-    <div class="modal-content">
-        <p> 정말로 삭제 하시겠습니까? </p>
-        <button id="confirmDeleteBtn"> 확인 </button>
-        <button id="cancelDeleteBtn"> 취소 </button>
+
+<!-- 삭제 확인 모달 -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmModalLabel">삭제 확인</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>정말로 이 메뉴를 삭제하시겠습니까?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 삭제 완료 모달 -->
+<div class="modal fade" id="deleteSuccessModal" tabindex="-1" aria-labelledby="deleteSuccessModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteSuccessModalLabel">알림</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>삭제가 완료되었습니다.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="successCloseBtn">확인</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -104,43 +111,68 @@
 
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        let menuCodeToDelete = null;
-        //삭제버튼 클릭시 모달 열기
-        document.querySelectorAll(".deleteBtn").forEach(button => {
-            button.addEventListener("click", (e) => {
-                menuCodeToDelete = e.target.dataset.menuCode; //메뉴 코드 저장
-                document.getElementById("deleteConfirmModal").style.display = "block" //모달열기
-            });
-        });
-        //"확인" 버튼 클릭 시 삭제 요청
-        document.getElementById("confirmDeleteBtn").addEventListener("click", () => {
-            fetch(`/menu/delete/${menuCodeToDelete}`, {
-                method: 'DELETE'
-            }).then(res => {
+    // 삭제 버튼 클릭 이벤트
+    document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const menuCode = this.getAttribute('data-menu-code'); // 메뉴 코드 가져오기
+            console.log(`Menu Code : ${menuCode}`); // 로그 확인
 
-                if (res.ok) {
-                    alert("메뉴가 삭제되었습니다.");
-                    window.location.reload();
-                } else {
-                    alert("삭제가 안되었으");
-                }
-            });
-        });
-        console.log("삭제할 메뉴  코드 확인차 ",menuCodeToDelete);
-        document.getElementById("cancelDeleteBtn").addEventListener("click", () => {
-            document.getElementById("deleteConfirmModal").style.display = "none"; // 모달 닫기
-        });
+            if(!menuCode){
+                alert("없다고 메뉴코드가 없다 이 멍청아!  HTML 코드 들어가서 너 오타있는지 확인해봐!!!!");
+                return;
+            } // 오류 메시지 알런트 창
 
-        //취소 버튼 클릭스 모달 닫기
-        document.onclick = function (event) {
-            const modal = document.getElementById("deleteConfirmModal");
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        };
+            const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+            // 삭제 버튼에 menuCode 저장
+            document.getElementById("confirmDeleteBtn").setAttribute('data-menu-code',menuCode);
+            deleteModal.show();
+
+
+            // const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+            // confirmDeleteBtn.setAttribute('data-menu-code', menuCode);
+            //
+            // deleteModal.show(); // 모달 띄우기
+        });
     });
+
+    // 실제 삭제 확인 버튼 클릭 시 이벤트 처리
+    document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
+        const menuCode = this.getAttribute('data-menu-code'); // 메뉴 코드 가져오기
+
+
+
+        fetch(`/menu/delete/${menuCode}`, {
+            method: 'DELETE', // 삭제요청
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response =>{
+            if(response.ok){
+                console.log(`Menu with code ${menuCode} deleted successfully`);
+
+                //삭제 완료 모달 열기
+                const successModal = new bootstrap.Modal(document.getElementById('deleteSuccessModal'));
+                successModal.show();
+
+                // 완료 모달의 닫기 버튼 클릭 시 홈 화면으로 리다이렉트
+                document.getElementById('successCloseBtn').addEventListener('click', function () {
+                    window.location.href = '/'; // 홈 화면으로 이동
+                });
+            } else {
+                console.error(`Failed to delete menu with code ${menuCode}`);
+                alert("삭제 요청에 실패했습니다. 다시 시도해 주세요.");
+            }
+        })
+            .catch(error => {
+                console.error('Error during deletion:', error);
+                alert("서버와의 통신 중 문제가 발생했습니다.");
+            });
+    });
+
+    // Ajax 요청 또는 form 제출 시 menuCode로 삭제 처리
+    console.log(`Deleting menu with code: ${menuCode}`);
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
 </body>
