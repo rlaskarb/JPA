@@ -2,29 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Document</title>
 </head>
 <body>
     <h1>PathVariable 로 전달 받은 메뉴 상세 조회</h1>
 
-    <table style="text-align: center; color: brown" >
+    <table>
         <tr>
             <th>메뉴번호</th>
             <th>메뉴이름</th>
             <th>메뉴가격</th>
-            <th>카테고리 코드</th>
+            <th>카테고리코드</th>
             <th>판매상태</th>
         </tr>
         <tr>
-            <th th:text="${result.menuCode}"></th>
-            <th th:text="${result.menuName}"></th>
-            <th th:text="${result.menuPrice}"></th>
-            <th th:text="${result.categoryCode}"></th>
-            <th th:text="${result.orderableStatus}"></th>
+            <td th:text="${result.menuCode}"></td>
+            <td th:text="${result.menuName}"></td>
+            <td th:text="${result.menuPrice}"></td>
+            <td th:text="${result.categoryCode}"></td>
+            <td th:text="${result.orderableStatus}"></td>
         </tr>
     </table>
+
 </body>
 </html>

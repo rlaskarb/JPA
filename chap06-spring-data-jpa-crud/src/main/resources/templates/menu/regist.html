@@ -1,163 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>메뉴 등록</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-         #menuForm {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-        }
-
-    </style>
-
+    <title>Title</title>
 </head>
 <body>
-<h1>신규 메뉴 등록</h1>
-<form id="menuForm" action="/menu/save" method="post">
+    <h1>신규 메뉴 등록</h1>
+    <form action="/menu/regist" method="post">
 
-    <div class="mb-3">
-        <label for="menuName" class="form-label">메뉴 이름:</label>
-        <input type="text" id="menuName" name="menuName" class="form-control" required>
-    </div>
+        <label>메뉴 이름 :</label>
+        <input type="text" name="menuName"><br>
+        <label>메뉴 가격 :</label>
+        <input type="number" name="menuPrice"><br>
 
-    <div class="mb-3">
-        <label for="menuPrice" class="form-label">메뉴 가격:</label>
-        <input type="number" id="menuPrice" name="menuPrice" class="form-control" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="categoryCode" class="form-label">카테고리:</label>
-        <select name="categoryCode" id="categoryCode" class="form-select">
-            <option th:each="category:${categories}"
-                    th:value="${category.categoryCode}"
-                    th:text="${category.categoryName}"></option>
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label for="orderableStatus" class="form-label">판매 여부:</label>
-        <select name="orderableStatus" id="orderableStatus" class="form-select">
+        <label>카테고리 : </label>
+        <select name="categoryCode" id="categoryCode"></select><br>
+        <label>판매여부 : </label>
+        <select name="orderableStatus">
             <option value="Y">가능</option>
             <option value="N">불가능</option>
-        </select>
-    </div>
+        </select><br>
+        <input type="submit" value="등록하기">
+    </form>
 
-    <button type="button" id="openModalBtn" class="btn btn-primary">메뉴 등록</button>
+    <script>
+        // category 정보 담겨있음
+        fetch('/menu/category') // 아직은 js 객체가 아닌 형태만 js
+            .then(res => res.json()) // 형태만 js 인 녀석을 진짜 js객체로 변환
+            .then(data => {
 
-</form>
+                // html 요소 취득하기
+                const $categoryCode
+                     = document.getElementById("categoryCode");
 
+                // data -> list 형태이기 때문에 반복문
+                for(let index in data) {
+                    // 반복하는 만큼 option 태그 만들기
+                    const $option = document.createElement("option");
+                    $option.value = data[index].categoryCode;
+                    $option.textContent = data[index].categoryName;
 
-<!--모달창 등록-->
-<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmModalLabel">등록 확인</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>정말로 이 메뉴를 등록하시겠습니까?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-primary" id="confirmBtn">확인</button>
-            </div>
-        </div>
-    </div>
-</div>
+                    $categoryCode.appendChild($option);
+                }
 
-<!-- 등록 완료 모달 -->
-<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="successModalLabel">알림</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>등록이 완료되었습니다.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="closeSuccessBtn">확인</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-
-    // 카테고리 데이터 동적 추가
-    fetch('/menu/category')
-        .then(res => res.json())
-        .then(data => {
-            const $categoryCode = document.getElementById("categoryCode");
-            data.forEach(category => {
-                const $option = document.createElement("option");
-                $option.value = category.categoryCode;
-                $option.textContent = category.categoryName;
-                $categoryCode.appendChild($option);
-            });
-        });
-
-    // 모달 요소 가져오기
-    const confirmModal = new bootstrap.Modal(document.getElementById("confirmModal"));
-    const successModal = new bootstrap.Modal(document.getElementById("successModal"));
-    const openModalBtn = document.getElementById("openModalBtn");
-    const confirmBtn = document.getElementById("confirmBtn");
-    const closeSuccessBtn = document.getElementById("closeSuccessBtn");
-
-    document.addEventListener("DOMContentLoaded", function () {
-
-        if (!openModalBtn) {
-            alert("메뉴 등록 버튼을 찾을 수 없습니다.");
-            return;
-        }
-
-        openModalBtn.addEventListener("click", () => {
-            confirmModal.show();
-        });
-    });
-
-
-
-    // "확인" 버튼 클릭 시 폼 제출 및 성공 모달 표시
-    confirmBtn.addEventListener("click", () => {
-        const form = document.getElementById("menuForm");
-        const formData = new FormData(form);
-
-        fetch('/menu/save', {
-            method: 'POST',
-            body: formData
-        }).then(res => {
-            if (res.ok) {
-                confirmModal.hide();
-                successModal.show();
-            } else {
-                alert("등록 실패");
-            }
-        }).catch(error => {
-            console.error('Error during registration:', error);
-            alert("서버와의 통신 중 문제가 발생했습니다.");
-        });
-    });
-
-    // "닫기" 버튼 클릭 시 성공 모달 닫기 및 홈 화면으로 이동
-    closeSuccessBtn.addEventListener("click", () => {
-        window.location.href = "/";
-    });
-</script>
-
-
+            })
+    </script>
 </body>
 </html>

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @SpringBootTest
-public class              NativeQueryTests {
+public class NativeQueryTests {
 
     @PersistenceContext
     private EntityManager manager;
